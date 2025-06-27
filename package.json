@@ -1,0 +1,31 @@
+{
+  "name": "docstring-cli",
+  "description":"Easily add docstrings via a structured format or let local AI do the job",
+  "author":"Remco Stoeten",
+  "license":"MIT",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "bin": {
+    "docstring": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["docstring", "cli", "typescript", "developer-tools"],
+  "author": "@remcostoeten",
+  "license": "MIT",
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
+
