@@ -86,7 +86,8 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist - commented out for npm package distribution
+# dist
 
 # Gatsby files
 .cache/
@@ -127,10 +128,11 @@ dist
 .pnp.*
 
 # TypeScript compiled output
-dist/
+# dist/ - needed for npm packaging
 lib/
-*.js.map
-*.d.ts.map
+# Source maps included for better debugging
+# *.js.map
+# *.d.ts.map
 
 # IDE files
 .vscode/

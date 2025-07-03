@@ -1,0 +1,185 @@
+/**
+ * @description
+ * desc
+ *
+
+ */
+
+/**
+ * @description
+ * some desc
+ *
+
+ */
+
+import { prompt } from 'enquirer';
+import { TFileSearchResult, TDocstringTemplate, TDocstringData } from '../types';
+
+// Enhanced color theme for better visual appeal
+const colors = {
+  primary: '\x1b[36m',    // cyan
+  secondary: '\x1b[35m',  // magenta
+  success: '\x1b[32m',    // green
+  warning: '\x1b[33m',    // yellow
+  info: '\x1b[34m',       // blue
+  muted: '\x1b[90m',      // gray
+  reset: '\x1b[0m',       // reset
+  bold: '\x1b[1m',        // bold
+  dim: '\x1b[2m'          // dim
+};
+
+// Custom theme for enquirer prompts
+const promptTheme = {
+  prefix: `${colors.primary}${colors.bold}?${colors.reset}`,
+  separator: `${colors.muted}${colors.dim}›${colors.reset}`,
+  pointer: `${colors.secondary}❯${colors.reset}`,
+  disabled: `${colors.muted}${colors.dim}`,
+  dark: `${colors.muted}`,
+  success: `${colors.success}`,
+  primary: `${colors.primary}`,
+  secondary: `${colors.secondary}`,
+  info: `${colors.info}`,
+  warning: `${colors.warning}`,
+  danger: '\x1b[31m',     // red
+  strong: `${colors.bold}`,
+  submitted: `${colors.success}${colors.bold}`
+};
+
+export async function promptForFile(files: TFileSearchResult[]): Promise<string> {
+  if (files.length === 0) {
+    throw new Error('No TypeScript files found in the current directory');
+  }
+
+  // Simple choices - just the files without complex headers/separators
+  const choices = files.map(file => ({
+    name: file.relativePath,
+    value: file.filepath
+  }));
+
+  try {
+    const response = await prompt<{ file: string }>({
+      type: 'autocomplete',
+      name: 'file',
+      message: `${colors.bold}${colors.primary}Select a TypeScript file:${colors.reset} ${colors.dim}💡 Type to search • Press Escape to quit${colors.reset}`,
+      choices: choices,
+      initial: 0
+    });
+
+    return response.file;
+  } catch (error) {
+    // Handle cancellation (Escape key, Ctrl+C, etc.)
+    if (!error || 
+        (error instanceof Error && (
+          error.message === '' || 
+          error.message.includes('cancelled') || 
+          error.message.includes('User force closed') ||
+          error.message.includes('cancelled by user') ||
+          error.message.includes('Aborted') ||
+          error.message.includes('interrupted')
+        )) ||
+        (typeof error === 'string' && error === '')) {
+      throw new Error('Operation cancelled by user');
+    }
+    throw error;
+  }
+}
+
+export async function promptForTemplate(templates: TDocstringTemplate[]): Promise<string> {
+  const choices = templates.map(template => ({
+    name: template.name,
+    value: template.name
+  }));
+
+  try {
+    const response = await prompt<{ template: string }>({
+      type: 'autocomplete',
+      name: 'template',
+      message: `${colors.bold}${colors.secondary}Select a docstring template:${colors.reset} ${colors.dim}💡 Type to search • Press Escape to quit${colors.reset}`,
+      choices: choices.map(choice => ({
+        ...choice,
+        name: `${colors.success}${choice.name}${colors.reset}`
+      })),
+      initial: 0
+    });
+
+    return response.template;
+  } catch (error) {
+    // Handle cancellation (Escape key, Ctrl+C, etc.)
+    if (!error || 
+        (error instanceof Error && (
+          error.message === '' || 
+          error.message.includes('cancelled') || 
+          error.message.includes('User force closed') ||
+          error.message.includes('cancelled by user') ||
+          error.message.includes('Aborted') ||
+          error.message.includes('interrupted')
+        )) ||
+        (typeof error === 'string' && error === '')) {
+      throw new Error('Operation cancelled by user');
+    }
+    throw error;
+  }
+}
+
+export async function promptForDocstringData(): Promise<TDocstringData> {
+  const questions = [
+    {
+      type: 'input',
+      name: 'description',
+      message: `${colors.bold}${colors.info}Enter description:${colors.reset}`,
+      validate: (input: string) => input.trim().length > 0 || `${colors.warning}Description is required${colors.reset}`
+    },
+    {
+      type: 'input',
+      name: 'emoji',
+      message: `${colors.bold}${colors.info}Enter emoji (optional):${colors.reset}`,
+      validate: (input: string) => {
+        if (!input.trim()) return true;
+        return input.trim().length <= 4 || `${colors.warning}Please enter a valid emoji${colors.reset}`;
+      }
+    },
+    {
+      type: 'confirm',
+      name: 'includeAuthor',
+      message: `${colors.bold}${colors.primary}Include @author tag?${colors.reset}`,
+      initial: false
+    }
+  ];
+
+  try {
+    const answers = await prompt(questions) as any;
+
+    let author: string | undefined;
+    if (answers.includeAuthor) {
+      const authorResponse = await prompt<{ author: string }>({
+        type: 'input',
+        name: 'author',
+        message: `${colors.bold}${colors.info}Enter author name:${colors.reset}`,
+        validate: (input: string) => input.trim().length > 0 || `${colors.warning}Author name is required${colors.reset}`
+      });
+      author = authorResponse.author;
+    }
+
+    return {
+      description: answers.description,
+      emoji: answers.emoji || undefined,
+      author
+    };
+  } catch (error) {
+    // Handle cancellation (Escape key, Ctrl+C, etc.)
+    if (!error || 
+        (error instanceof Error && (
+          error.message === '' || 
+          error.message.includes('cancelled') || 
+          error.message.includes('User force closed') ||
+          error.message.includes('cancelled by user') ||
+          error.message.includes('Aborted') ||
+          error.message.includes('interrupted')
+        )) ||
+        (typeof error === 'string' && error === '')) {
+      throw new Error('Operation cancelled by user');
+    }
+    throw error;
+  }
+}
+

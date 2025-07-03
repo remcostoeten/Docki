@@ -23,6 +23,7 @@ export type TTemplateToken = {
 export type TFileSearchResult  = {
   filepath: string;
   relativePath: string;
+  lastModified: Date;
 };
 
 export type TCliPromptResult = {
@@ -36,4 +37,11 @@ export type TDocstringConfig = {
   excludeDirectories: string[];
   defaultTemplate?: string;
   defaultAuthor?: string;
+  ollamaModel?: string;
+};
+
+export type TGeneratedDoc = {
+  description: string;
+  emoji?: string;
+  author?: string;
 };
