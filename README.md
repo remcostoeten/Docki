@@ -1,26 +1,25 @@
-# Docstring CLI 🚀
+# Docki
 
-Easily add docstring intros with various templates interactively to your TypeScript files. Choose from manual input or let local AI (via Ollama) generate meaningful docstrings for your functions and classes.
+A simple command-line tool to add JSDoc comments to your TypeScript files. You can either type them in manually or have AI generate them for you using Ollama.
 
-## Features ✨
+## What it does
 
-- 🔍 **Smart File Search** - Recursively scan and search through your TypeScript files
-- 🤖 **AI-Powered Generation** - Local AI integration with Ollama for intelligent docstring creation
-- 📋 **Template System** - Multiple docstring templates to choose from
-- 💾 **Safe Operations** - Automatic backup before modifications with easy revert
-- ⚙️ **Configurable** - Set default author, templates, and preferences
-- 🎨 **Beautiful Interface** - Clean, colorful terminal UI with search capabilities
+- Scans your TypeScript files and lets you pick one
+- Generates JSDoc comments automatically with AI, or you can write them yourself
+- Includes several comment templates
+- Makes backups before changing anything
+- Works entirely offline (no cloud AI services)
 
 ## Installation
 
 ```bash
-npm install -g docstring-cli
+npm install -g docki
 ```
 
 ## Usage
 
 ```bash
-docstring
+docki
 ```
 
 The CLI will guide you through:
@@ -66,6 +65,11 @@ Create a `.docstring-cli.json` file in your project root:
 ## License
 
 MIT © [Remco Stoeten](https://github.com/remcostoeten)
+
+
+---
+
+This project was renamed from docstring-cli to Docki.
 
 ## Contributing
 

@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.1] - 2025-07-03
+## [0.1.0] - 2025-07-03
+
+### Changed
+- Renamed from "docstring-cli" to "Docki" for a shorter, catchier name
+- Updated all documentation and branding to reflect new name
 
 ### Added
-- Initial release of docstring-cli
+- Initial release of Docki (formerly docstring-cli)
 - Interactive TypeScript file selection with search functionality
 - Multiple docstring templates (default, detailed, minimal)
 - AI-powered docstring generation using Ollama and CodeLlama
@@ -34,17 +38,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Installation
 ```bash
-npm install -g docstring-cli
+npm install -g docki
 ```
 
 ### Usage
 ```bash
 # Interactive mode with AI
-docstring
+docki
 
 # Direct AI mode
-docstring ai <filepath>
+docki ai <filepath>
 
 # Revert changes
-docstring --revert
+docki --revert
 ```

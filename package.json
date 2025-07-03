@@ -1,10 +1,10 @@
 {
-  "name": "docstring-cli",
-  "description": "Easily add docstrings via a structured format or let local AI do the job",
+"name": "docki",
+  "description": "Simple CLI to add JSDoc comments to TypeScript files, with optional AI generation",
   "version": "0.1.0",
   "main": "dist/index.js",
   "bin": {
-    "docstring": "dist/index.js"
+    "docki": "dist/index.js"
   },
   "files": [
     "dist/**/*",
@@ -37,11 +37,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/remcostoeten/docstring-cli.git"
+    "url": "https://github.com/remcostoeten/docki.git"
   },
-  "homepage": "https://github.com/remcostoeten/docstring-cli#readme",
+  "homepage": "https://github.com/remcostoeten/docki#readme",
   "bugs": {
-    "url": "https://github.com/remcostoeten/docstring-cli/issues"
+    "url": "https://github.com/remcostoeten/docki/issues"
   },
   "dependencies": {
     "enquirer": "^2.4.1",

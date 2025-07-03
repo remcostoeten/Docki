@@ -54,8 +54,34 @@ const colors = {
     muted: '\x1b[90m', // gray
     reset: '\x1b[0m' // reset
 };
+// Displays help information
+function displayHelp() {
+    console.log(`\nHelp:
+  --help, -h       Display this help message
+  --version, -v    Display version information
+  --revert         Revert changes made to a file
+  ai <filepath>    Use AI to generate a docstring for the specified file`);
+}
+// Displays version information
+function displayVersion() {
+    console.log(`\nDocki version: 0.1.0`);
+}
+// Display usage hint
+function displayUsageHint() {
+    console.log(`Run 'docki --help' for usage information.`);
+}
 async function main() {
     try {
+        // Handle help command
+        if (process.argv.includes('--help') || process.argv.includes('-h')) {
+            displayHelp();
+            return;
+        }
+        // Handle version command
+        if (process.argv.includes('--version') || process.argv.includes('-v')) {
+            displayVersion();
+            return;
+        }
         // Handle revert command
         if (process.argv.includes('--revert')) {
             await handleRevert();
@@ -65,7 +91,8 @@ async function main() {
         if (process.argv[2] === 'ai') {
             const filepath = process.argv[3];
             if (!filepath) {
-                (0, interface_1.displayError)('Filepath is required when using AI mode. Usage: docstring ai <filepath>');
+                (0, interface_1.displayError)('Filepath is required when using AI mode. Usage: docki ai <filepath>');
+                displayUsageHint();
                 return;
             }
             await handleAiMode(filepath);

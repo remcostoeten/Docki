@@ -28,7 +28,7 @@ ${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██�
 ${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╔╝╚██████╔╝╚██████╗███████║   ██║   ██║  ██║██║██║ ╚█${colors.reset}${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}╚═════╝  ╚═════╝  ╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚╝${colors.reset} ${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}               ${colors.info}${colors.bold}Docstring CLI - ${getVersionWithEmoji()} - by @remcostoeten${colors.reset}      ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}                     ${colors.info}${colors.bold}Docki - ${getVersionWithEmoji()} - by @remcostoeten${colors.reset}        ${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
 ${colors.primary}${colors.bold}╚═══════════════════════════════════════════════════════════════╝${colors.reset}
 
@@ -142,7 +142,7 @@ export function displaySuccess(filepath: string): void {
   console.log(`
 ${colors.success}${colors.bold}✅ Success!${colors.reset} File modified: ${colors.info}${filepath}${colors.reset}
 
-${colors.info}💡${colors.reset} ${colors.muted}To revert changes, run:${colors.reset} ${colors.primary}${colors.bold}docstring --revert${colors.reset}
+${colors.info}💡${colors.reset} ${colors.muted}To revert changes, run:${colors.reset} ${colors.primary}${colors.bold}docki --revert${colors.reset}
 `);
 }
 
