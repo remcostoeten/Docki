@@ -54,13 +54,85 @@ const colors = {
     muted: '\x1b[90m', // gray
     reset: '\x1b[0m' // reset
 };
+// Enhanced color scheme for help menu
+const helpColors = {
+    primary: '\x1b[36m', // cyan
+    secondary: '\x1b[35m', // magenta  
+    success: '\x1b[32m', // green
+    warning: '\x1b[33m', // yellow
+    info: '\x1b[34m', // blue
+    muted: '\x1b[90m', // gray
+    bright: '\x1b[97m', // bright white
+    reset: '\x1b[0m', // reset
+    bold: '\x1b[1m', // bold
+    dim: '\x1b[2m', // dim
+    underline: '\x1b[4m' // underline
+};
 // Displays help information
 function displayHelp() {
-    console.log(`\nHelp:
-  --help, -h       Display this help message
-  --version, -v    Display version information
-  --revert         Revert changes made to a file
-  ai <filepath>    Use AI to generate a docstring for the specified file`);
+    console.log(`
+${helpColors.primary}${helpColors.bold}╔══════════════════════════════════════════════════════════════════════════════╗${helpColors.reset}
+${helpColors.primary}║${helpColors.reset}                               ${helpColors.bright}${helpColors.bold}🚀 DOCKI HELP${helpColors.reset}                               ${helpColors.primary}║${helpColors.reset}
+${helpColors.primary}║${helpColors.reset}           ${helpColors.muted}Simple CLI to add JSDoc comments to TypeScript files${helpColors.reset}           ${helpColors.primary}║${helpColors.reset}
+${helpColors.primary}╚══════════════════════════════════════════════════════════════════════════════╝${helpColors.reset}
+
+${helpColors.secondary}${helpColors.bold}📋 USAGE${helpColors.reset}
+${helpColors.muted}────────${helpColors.reset}
+  ${helpColors.success}${helpColors.bold}docki${helpColors.reset}                     ${helpColors.muted}Interactive mode (scan files, choose template)${helpColors.reset}
+  ${helpColors.success}${helpColors.bold}docki ai${helpColors.reset} ${helpColors.info}<filepath>${helpColors.reset}       ${helpColors.muted}AI mode (generate docstring for specific file)${helpColors.reset}
+  ${helpColors.success}${helpColors.bold}docki --help${helpColors.reset}, ${helpColors.success}-h${helpColors.reset}          ${helpColors.muted}Display this help message${helpColors.reset}
+  ${helpColors.success}${helpColors.bold}docki --version${helpColors.reset}, ${helpColors.success}-v${helpColors.reset}       ${helpColors.muted}Display version information${helpColors.reset}
+  ${helpColors.success}${helpColors.bold}docki --revert${helpColors.reset}            ${helpColors.muted}Revert changes made to a file${helpColors.reset}
+
+${helpColors.secondary}${helpColors.bold}🎯 MODES${helpColors.reset}
+${helpColors.muted}─────────${helpColors.reset}
+  ${helpColors.warning}${helpColors.bold}🔍 Interactive Mode${helpColors.reset} ${helpColors.dim}(default)${helpColors.reset}
+    ${helpColors.muted}•${helpColors.reset} Scans your project for TypeScript files
+    ${helpColors.muted}•${helpColors.reset} Lets you choose which file to document
+    ${helpColors.muted}•${helpColors.reset} Tries AI first, falls back to manual input if AI unavailable
+    ${helpColors.muted}•${helpColors.reset} ${helpColors.success}Best for exploring your codebase${helpColors.reset}
+
+  ${helpColors.warning}${helpColors.bold}🤖 AI Mode${helpColors.reset} ${helpColors.dim}(docki ai <filepath>)${helpColors.reset}
+    ${helpColors.muted}•${helpColors.reset} Directly processes a specific file
+    ${helpColors.muted}•${helpColors.reset} Skips file selection
+    ${helpColors.muted}•${helpColors.reset} Uses AI if available, otherwise prompts for manual input
+    ${helpColors.muted}•${helpColors.reset} ${helpColors.success}Best when you know exactly which file to document${helpColors.reset}
+
+${helpColors.secondary}${helpColors.bold}🧠 AI vs MANUAL${helpColors.reset}
+${helpColors.muted}─────────────────${helpColors.reset}
+  ${helpColors.info}${helpColors.bold}✨ Use AI when:${helpColors.reset}
+    ${helpColors.success}✓${helpColors.reset} You have Ollama installed and running
+    ${helpColors.success}✓${helpColors.reset} You want quick, contextual docstrings
+    ${helpColors.success}✓${helpColors.reset} The function/class is complex and you want smart analysis
+    ${helpColors.success}✓${helpColors.reset} You're documenting many files and want consistency
+
+  ${helpColors.info}${helpColors.bold}✏️  Use Manual when:${helpColors.reset}
+    ${helpColors.warning}•${helpColors.reset} You don't have Ollama installed
+    ${helpColors.warning}•${helpColors.reset} You want specific, custom documentation
+    ${helpColors.warning}•${helpColors.reset} You know exactly what the docstring should say
+    ${helpColors.warning}•${helpColors.reset} You're working with domain-specific code that needs precise docs
+
+${helpColors.secondary}${helpColors.bold}💡 EXAMPLES${helpColors.reset}
+${helpColors.muted}──────────────${helpColors.reset}
+  ${helpColors.success}docki${helpColors.reset}                         ${helpColors.muted}# Interactive mode${helpColors.reset}
+  ${helpColors.success}docki ai${helpColors.reset} ${helpColors.info}src/utils/parser.ts${helpColors.reset}  ${helpColors.muted}# AI mode for specific file${helpColors.reset}
+  ${helpColors.success}docki --revert${helpColors.reset}               ${helpColors.muted}# Revert previous changes${helpColors.reset}
+
+${helpColors.secondary}${helpColors.bold}⚙️  CONFIGURATION${helpColors.reset}
+${helpColors.muted}────────────────────${helpColors.reset}
+  Create ${helpColors.info}${helpColors.bold}.docstring-cli.json${helpColors.reset} in your project root:
+  ${helpColors.dim}{
+    "defaultAuthor": "Your Name",
+    "defaultTemplate": "default",
+    "aiEnabled": true
+  }${helpColors.reset}
+
+${helpColors.secondary}${helpColors.bold}🔗 LINKS${helpColors.reset}
+${helpColors.muted}─────────${helpColors.reset}
+  ${helpColors.info}${helpColors.underline}https://github.com/remcostoeten/docki${helpColors.reset}
+
+${helpColors.muted}${helpColors.dim}Made with ❤️  by @remcostoeten${helpColors.reset}
+`);
 }
 // Displays version information
 function displayVersion() {
@@ -91,7 +163,7 @@ async function main() {
         if (process.argv[2] === 'ai') {
             const filepath = process.argv[3];
             if (!filepath) {
-                (0, interface_1.displayError)('Filepath is required when using AI mode. Usage: docki ai <filepath>');
+                (0, interface_1.displayError)('Filepath is required when using AI mode. Usage: docstring ai <filepath>');
                 displayUsageHint();
                 return;
             }

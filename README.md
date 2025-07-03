@@ -4,11 +4,11 @@ A simple command-line tool to add JSDoc comments to your TypeScript files. You c
 
 ## What it does
 
-- Scans your TypeScript files and lets you pick one
-- Generates JSDoc comments automatically with AI, or you can write them yourself
+- Indexes all `.ts` and `.tsx` files recursive from the directory you run it from
+- Shows all files, allows you to select by navigating via arrow or filtering via fuzzysearch.
+-Prompts for @description, or whatever you define via templates or let AI do the job
 - Includes several comment templates
 - Makes backups before changing anything
-- Works entirely offline (no cloud AI services)
 
 ## Installation
 
@@ -22,22 +22,11 @@ npm install -g docki
 docki
 ```
 
-The CLI will guide you through:
-1. Selecting a TypeScript file from your project
-2. Choosing a docstring template
-3. Either generating content with AI or entering it manually
-4. Reviewing and applying the changes
-
 ## Requirements
 
 - Node.js 16+
 - TypeScript files (.ts, .tsx)
 - Ollama (optional, for AI generation)
-
-## Supported File Types
-
-- TypeScript (.ts)
-- TypeScript React (.tsx)
 
 ## Templates
 
@@ -62,15 +51,7 @@ Create a `.docstring-cli.json` file in your project root:
 }
 ```
 
-## License
+xxx,
 
-MIT © [Remco Stoeten](https://github.com/remcostoeten)
+Remco Stoeten
 
-
----
-
-This project was renamed from docstring-cli to Docki.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.

@@ -18,17 +18,17 @@ const colors = {
 
 export function displayIntro(): void {
   console.clear();
-  console.log(`
+console.log(`
 ${colors.primary}${colors.bold}╔═══════════════════════════════════════════════════════════════╗${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╗  ██████╗  ██████╗███████╗████████╗██████╗ ██╗███╗${colors.reset}  ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██╔══██╗██╔═══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██║████╗${colors.reset} ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ███████╗   ██║   ██████╔╝██║██╔██╗${colors.reset}${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ╚════██║   ██║   ██╔══██╗██║██║╚██${colors.reset}${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╔╝╚██████╔╝╚██████╗███████║   ██║   ██║  ██║██║██║ ╚█${colors.reset}${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}╚═════╝  ╚═════╝  ╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚╝${colors.reset} ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╗  ██████╗  ██████╗██╗  ██╗██╗${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     █████╔╝ ██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ██╔═██╗ ██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╔╝╚██████╔╝╚██████╗██║  ██╗██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝${colors.reset}                   ${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}                     ${colors.info}${colors.bold}Docki - ${getVersionWithEmoji()} - by @remcostoeten${colors.reset}        ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}               ${colors.info}${colors.bold}Docki - ${getVersionWithEmoji()} - by @remcostoeten${colors.reset}        ${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
 ${colors.primary}${colors.bold}╚═══════════════════════════════════════════════════════════════╝${colors.reset}
 

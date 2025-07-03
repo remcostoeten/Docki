@@ -57,14 +57,14 @@ function displayIntro() {
     console.log(`
 ${colors.primary}${colors.bold}╔═══════════════════════════════════════════════════════════════╗${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╗  ██████╗  ██████╗███████╗████████╗██████╗ ██╗███╗${colors.reset}  ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██╔══██╗██╔═══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██║████╗${colors.reset} ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ███████╗   ██║   ██████╔╝██║██╔██╗${colors.reset}${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ╚════██║   ██║   ██╔══██╗██║██║╚██${colors.reset}${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╔╝╚██████╔╝╚██████╗███████║   ██║   ██║  ██║██║██║ ╚█${colors.reset}${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}╚═════╝  ╚═════╝  ╚═════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚╝${colors.reset} ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╗  ██████╗  ██████╗██╗  ██╗██╗${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     █████╔╝ ██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ██╔═██╗ ██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╔╝╚██████╔╝╚██████╗██║  ██╗██║${colors.reset}                   ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝${colors.reset}                   ${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}                     ${colors.info}${colors.bold}Docki - ${(0, version_1.getVersionWithEmoji)()} - by @remcostoeten${colors.reset}        ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}               ${colors.info}${colors.bold}Docki - ${(0, version_1.getVersionWithEmoji)()} - by @remcostoeten${colors.reset}        ${colors.primary}║${colors.reset}
 ${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
 ${colors.primary}${colors.bold}╚═══════════════════════════════════════════════════════════════╝${colors.reset}
 
