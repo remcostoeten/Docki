@@ -11,6 +11,7 @@ const defaultConfig = {
     extensions: [], // Add default extensions if needed
     excludeDirectories: [], // Add default directories if needed
     ollamaModel: 'codellama:7b',
+    maxDescriptionLength: 80, // Default maximum line length for descriptions
 };
 /**
  * Searches for the configuration file in the current working directory and home directory.

@@ -21,6 +21,7 @@ async function generateDocstringWithAI(filepath) {
         // Generate documentation using Ollama
         const generatedDoc = await (0, ollama_service_1.generateDocumentation)(sourceCode, {
             model: config.ollamaModel,
+            maxDescriptionLength: config.maxDescriptionLength,
         });
         return generatedDoc;
     }

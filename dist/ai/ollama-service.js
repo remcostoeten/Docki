@@ -14,6 +14,7 @@ function loadOllamaConfig(config) {
     return {
         model: config?.model || DEFAULT_MODEL,
         timeout: config?.timeout || DEFAULT_TIMEOUT,
+        maxDescriptionLength: config?.maxDescriptionLength || 80,
     };
 }
 /**
@@ -45,10 +46,39 @@ async function checkModelAvailability(model) {
     }
 }
 /**
+ * Wraps text to fit within specified line length
+ */
+function wrapText(text, maxLength) {
+    if (text.length <= maxLength) {
+        return text;
+    }
+    const words = text.split(' ');
+    const lines = [];
+    let currentLine = '';
+    for (const word of words) {
+        if (currentLine.length + word.length + 1 <= maxLength) {
+            currentLine += (currentLine ? ' ' : '') + word;
+        }
+        else {
+            if (currentLine) {
+                lines.push(currentLine);
+            }
+            currentLine = word;
+        }
+    }
+    if (currentLine) {
+        lines.push(currentLine);
+    }
+    return lines.join('\n');
+}
+/**
  * Creates a structured prompt for generating documentation from TypeScript source code
  */
-function createDocumentationPrompt(sourceCode) {
-    return `Read the following TypeScript file and return a concise one-sentence description and a single relevant emoji. Respond as JSON with keys description and emoji.
+function createDocumentationPrompt(sourceCode, maxLength) {
+    const lengthInstruction = maxLength
+        ? ` The description should be concise and fit within ${maxLength} characters per line.`
+        : '';
+    return `Read the following TypeScript file and return a concise one-sentence description and a single relevant emoji.${lengthInstruction} Respond as JSON with keys description and emoji.
 
 TypeScript source code:
 \`\`\`typescript
@@ -156,9 +186,14 @@ async function generateDocumentation(sourceCode, config) {
     await checkOllamaBinary();
     await checkModelAvailability(ollamaConfig.model);
     // Generate documentation
-    const prompt = createDocumentationPrompt(sourceCode);
+    const prompt = createDocumentationPrompt(sourceCode, ollamaConfig.maxDescriptionLength);
     const response = await sendPromptToOllama(prompt, ollamaConfig.model, ollamaConfig.timeout);
-    return parseOllamaResponse(response);
+    const result = parseOllamaResponse(response);
+    // Wrap the description if it's too long
+    if (result.description && ollamaConfig.maxDescriptionLength) {
+        result.description = wrapText(result.description, ollamaConfig.maxDescriptionLength);
+    }
+    return result;
 }
 /**
  * Validates Ollama setup and model availability

@@ -7,6 +7,7 @@ const defaultConfig: TDocstringConfig = {
   extensions: [], // Add default extensions if needed
   excludeDirectories: [], // Add default directories if needed
   ollamaModel: 'codellama:7b',
+  maxDescriptionLength: 80, // Default maximum line length for descriptions
 };
 
 /**

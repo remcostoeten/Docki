@@ -38,6 +38,7 @@ export type TDocstringConfig = {
   defaultTemplate?: string;
   defaultAuthor?: string;
   ollamaModel?: string;
+  maxDescriptionLength?: number;
 };
 
 export type TGeneratedDoc = {

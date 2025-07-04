@@ -19,6 +19,7 @@ export async function generateDocstringWithAI(filepath: string): Promise<TGenera
     // Generate documentation using Ollama
     const generatedDoc = await generateDocumentation(sourceCode, {
       model: config.ollamaModel,
+      maxDescriptionLength: config.maxDescriptionLength,
     });
     
     return generatedDoc;

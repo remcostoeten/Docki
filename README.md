@@ -1,14 +1,20 @@
 # Docki
 
-A simple command-line tool to add JSDoc comments to your TypeScript files. You can either type them in manually or have AI generate them for you using Ollama.
+🚀 **AI-powered TypeScript docstring generator** - Add professional JSDoc comments to your TypeScript files with local AI or manual input.
+
+## ✨ Demo
+
+![Docki Demo](./assets/docki-demo.gif)
+
+> **⚡ Watch Docki in action:** Beautiful ASCII interface, intelligent file scanning, AI-powered docstring generation, and seamless code integration - all in seconds!
 
 ## What it does
 
-- Indexes all `.ts` and `.tsx` files recursive from the directory you run it from
-- Shows all files, allows you to select by navigating via arrow or filtering via fuzzysearch.
--Prompts for @description, or whatever you define via templates or let AI do the job
-- Includes several comment templates
-- Makes backups before changing anything
+- **Scans** all `.ts` and `.tsx` files recursively from your current directory
+- **Interactive selection** with arrow key navigation and fuzzy search
+- **AI-powered generation** using local Ollama, or manual input as fallback
+- **Multiple templates** for different documentation styles
+- **Safe operations** with automatic backups before any changes
 
 ## Installation
 
@@ -45,13 +51,25 @@ Create a `.docstring-cli.json` file in your project root:
 
 ```json
 {
+  "extensions": [".ts", ".tsx", ".js", ".jsx"],
+  "excludeDirectories": ["node_modules", "dist", ".git"],
+  "defaultTemplate": "jsdoc",
   "defaultAuthor": "Your Name",
-  "defaultTemplate": "default",
-  "aiEnabled": true
+  "ollamaModel": "codellama:7b",
+  "maxDescriptionLength": 80
 }
 ```
 
-xxx,
+### Configuration Options
 
-Remco Stoeten
+- **extensions**: File extensions to scan for (default: TypeScript files)
+- **excludeDirectories**: Directories to ignore during scanning
+- **defaultTemplate**: Template to use by default
+- **defaultAuthor**: Your name to include in docstrings
+- **ollamaModel**: AI model to use for generation (requires Ollama)
+- **maxDescriptionLength**: Maximum line length for AI-generated descriptions (default: 80)
+
+## License
+
+MIT © [Remco Stoeten](https://github.com/remcostoeten)
 

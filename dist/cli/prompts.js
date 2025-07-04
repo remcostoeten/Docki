@@ -48,11 +48,44 @@ async function promptForFile(files) {
     if (files.length === 0) {
         throw new Error('No TypeScript files found in the current directory');
     }
+    // Prioritize and limit files for better UX
+    const prioritizeFiles = (files) => {
+        // Sort files: src/ files first, then root files, then others
+        const sorted = files.sort((a, b) => {
+            const aInSrc = a.relativePath.startsWith('src/');
+            const bInSrc = b.relativePath.startsWith('src/');
+            const aInRoot = !a.relativePath.includes('/');
+            const bInRoot = !b.relativePath.includes('/');
+            if (aInSrc && !bInSrc)
+                return -1;
+            if (!aInSrc && bInSrc)
+                return 1;
+            if (aInRoot && !bInRoot)
+                return -1;
+            if (!aInRoot && bInRoot)
+                return 1;
+            return a.relativePath.localeCompare(b.relativePath);
+        });
+        // If there are too many files, show a reasonable number
+        if (sorted.length > 25) {
+            return sorted.slice(0, 25);
+        }
+        return sorted;
+    };
+    const displayFiles = prioritizeFiles(files);
+    const hasMoreFiles = files.length > displayFiles.length;
     // Simple choices - just the files without complex headers/separators
-    const choices = files.map(file => ({
+    const choices = displayFiles.map(file => ({
         name: file.relativePath,
         value: file.filepath
     }));
+    // Add an option to show all files if we're limiting
+    if (hasMoreFiles) {
+        choices.push({
+            name: `${colors.dim}... show all ${files.length} files${colors.reset}`,
+            value: 'SHOW_ALL_FILES'
+        });
+    }
     try {
         const response = await (0, enquirer_1.prompt)({
             type: 'autocomplete',
@@ -61,6 +94,21 @@ async function promptForFile(files) {
             choices: choices,
             initial: 0
         });
+        // Handle "show all files" option
+        if (response.file === 'SHOW_ALL_FILES') {
+            const allChoices = files.map(file => ({
+                name: file.relativePath,
+                value: file.filepath
+            }));
+            const allFilesResponse = await (0, enquirer_1.prompt)({
+                type: 'autocomplete',
+                name: 'file',
+                message: `${colors.bold}${colors.primary}Select from all ${files.length} files:${colors.reset} ${colors.dim}💡 Type to search • Press Escape to quit${colors.reset}`,
+                choices: allChoices,
+                initial: 0
+            });
+            return allFilesResponse.file;
+        }
         return response.file;
     }
     catch (error) {

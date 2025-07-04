@@ -2,6 +2,7 @@ import type { TGeneratedDoc } from '../types/index';
 export type TOllamaConfig = {
     model?: string;
     timeout?: number;
+    maxDescriptionLength?: number;
 };
 /**
  * Main function to generate documentation from TypeScript source code using Ollama

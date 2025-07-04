@@ -55,18 +55,11 @@ const colors = {
 function displayIntro() {
     console.clear();
     console.log(`
-${colors.primary}${colors.bold}╔═══════════════════════════════════════════════════════════════╗${colors.reset}
-${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╗  ██████╗  ██████╗██╗  ██╗██╗${colors.reset}                   ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝██║${colors.reset}                   ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     █████╔╝ ██║${colors.reset}                   ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██║  ██║██║   ██║██║     ██╔═██╗ ██║${colors.reset}                   ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}██████╔╝╚██████╔╝╚██████╗██║  ██╗██║${colors.reset}                   ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}    ${colors.secondary}${colors.bold}╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝${colors.reset}                   ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}               ${colors.info}${colors.bold}Docki - ${(0, version_1.getVersionWithEmoji)()} - by @remcostoeten${colors.reset}        ${colors.primary}║${colors.reset}
-${colors.primary}║${colors.reset}                                                               ${colors.primary}║${colors.reset}
-${colors.primary}${colors.bold}╚═══════════════════════════════════════════════════════════════╝${colors.reset}
+${colors.primary}${colors.bold}╔═════════════════════════════════════════════════════╗${colors.reset}
+${colors.primary}║${colors.reset}      ${colors.secondary}${colors.bold}▄▀█ █▀▄ █▀▄▀█ █▄▄ █▀█${colors.reset}               ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}      ${colors.secondary}${colors.bold}█▀█ █▄▀ █░▀░█ █▄█ █▄█${colors.reset}               ${colors.primary}║${colors.reset}
+${colors.primary}║${colors.reset}               ${colors.info}${colors.bold}Docki - ${(0, version_1.getVersionWithEmoji)()}${colors.reset}            ${colors.primary}║${colors.reset}
+${colors.primary}${colors.bold}╚═════════════════════════════════════════════════════╝${colors.reset}
 
 ${colors.muted}Navigation: ${colors.reset}${colors.bold}↑↓${colors.reset} ${colors.muted}• Search: ${colors.reset}${colors.bold}type${colors.reset} ${colors.muted}• Exit: ${colors.reset}${colors.bold}Escape${colors.reset}
 
@@ -74,6 +67,11 @@ ${colors.muted}Navigation: ${colors.reset}${colors.bold}↑↓${colors.reset} ${
 }
 async function runInteractiveFlow(files, templates) {
     try {
+        // Add a brief pause to let users see the intro
+        await new Promise(resolve => setTimeout(resolve, 800));
+        // Show file scanning status
+        console.log(`🔍 ${colors.info}Scanning files...${colors.reset}`);
+        console.log(`📋 ${colors.info}Loading templates...${colors.reset}`);
         // Step 1: File selection
         const selectedFile = await (0, prompts_1.promptForFile)(files);
         // Step 2: Try AI first, then fallback to manual
