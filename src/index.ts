@@ -103,7 +103,8 @@ ${helpColors.muted}${helpColors.dim}Made with ❤️  by @remcostoeten${helpColo
 
 // Displays version information
 function displayVersion(): void {
-  console.log(`\nDocki version: 0.1.0`);
+  const packageJson = require('../package.json');
+  console.log(`\nDocki version: ${packageJson.version}`);
 }
 
 // Display usage hint
